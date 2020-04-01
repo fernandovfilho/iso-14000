@@ -16,4 +16,10 @@ describe('Activity', () => {
 
         expect(response.body).toHaveProperty('id');
     });
+
+    it('should be able to list activities', async () => {
+        const response = await request(app).get('/ativities').send();
+
+        expect(Array.isArray(response.body)).toBe(true);
+    });
 });
