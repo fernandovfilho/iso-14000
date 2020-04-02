@@ -1,12 +1,7 @@
 const express = require('express');
 const routes = express.Router();
-const generateRandomId = require('./utils/generateRandomId');
+const activitiesController = require('../src/controllers/activitiesController');
 
-routes.get('/', (req, res) => {
-    const id = generateRandomId();
-    res.json({
-        id,
-    });
-});
+routes.get('/activities', activitiesController.index);
 
 module.exports = routes;
