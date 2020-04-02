@@ -11,7 +11,7 @@ describe('Activity', () => {
         await connection.migrate.rollback();
         await connection.destroy();
     });
-    /* 
+
     it('should be able to create a new activity', async () => {
         const response = await request(app).post('/activities').send({
             title: 'Concrete production',
@@ -25,7 +25,7 @@ describe('Activity', () => {
         });
 
         expect(response.body).toHaveProperty('id');
-    }); */
+    });
 
     it('should be able to list activities', async () => {
         const response = await request(app).get('/activities').send();
