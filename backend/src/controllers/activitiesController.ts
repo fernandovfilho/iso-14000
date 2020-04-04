@@ -44,7 +44,22 @@ class ActivityController {
             if (res) return response.send()
             return response.status(500).send()
         } catch (error) {
-            console.log('error', error)
+            return response.status(500).send()
+        }
+    }
+
+    public async destroy(
+        request: Request,
+        response: Response
+    ): Promise<Response> {
+        try {
+            const { id } = request.params
+            let activity = new Activity()
+            activity.id = Number(id)
+            const res = await activity.delete()
+            if (res) return response.send()
+            return response.status(500).send()
+        } catch (error) {
             return response.status(500).send()
         }
     }

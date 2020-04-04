@@ -12,14 +12,13 @@ class ActivityModel {
     unit: String
 
     constructor(activity?: {
-        id
-        title
-        description
-        environment
-        contaminationType
-        level
-        value
-        unit
+        title: String
+        description: String
+        environment: String
+        contaminationType: String
+        level: String
+        value: Number
+        unit: String
     }) {
         if (activity) {
             this.title = activity.title
@@ -29,7 +28,6 @@ class ActivityModel {
             this.level = activity.level
             this.value = activity.value
             this.unit = activity.unit
-            if (activity.id) this.id = activity.id
         }
     }
 
@@ -40,20 +38,30 @@ class ActivityModel {
 
     public async list(): Promise<{ count: number; activities: Array<object> }> {
         const [count] = await connection('activities').count()
-
         const activities = await connection('activities').select()
-
         return { count, activities }
     }
 
     public async update(): Promise<boolean> {
         try {
-            await connection('activities')
+            const id = await connection('activities')
                 .update(this.toJson())
                 .where({ id: this.id })
-            return true
+            if (id) return true
+            throw 'Update Error'
         } catch (error) {
-            console.log('error', error)
+            return false
+        }
+    }
+
+    public async delete(): Promise<boolean> {
+        try {
+            const count = await connection('activities')
+                .del()
+                .where({ id: this.id })
+            if (count) return true
+            throw 'Delete error'
+        } catch (error) {
             return false
         }
     }
