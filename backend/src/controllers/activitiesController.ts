@@ -1,5 +1,4 @@
 import { Request, Response } from 'express'
-import connection from '../database/connection'
 import Activity from '../models/Activity'
 
 class ActivityController {
@@ -27,6 +26,23 @@ class ActivityController {
             const id = await activity.save()
 
             return response.json({ id })
+        } catch (error) {
+            return response.status(500).send()
+        }
+    }
+
+    public async update(
+        request: Request,
+        response: Response
+    ): Promise<Response> {
+        try {
+            const { body } = request
+            const { id } = request.params
+            let activity = new Activity(body)
+            activity.id = Number(id)
+            const res = await activity.update()
+            if (res) return response.send()
+            return response.status(500).send()
         } catch (error) {
             console.log('error', error)
             return response.status(500).send()

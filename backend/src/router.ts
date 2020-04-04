@@ -5,5 +5,6 @@ const routes = Router()
 
 routes.get('/activities', ActivityController.index)
 routes.post('/activities', ActivityController.store)
+routes.put('/activities/:id', ActivityController.update)
 
 export default routes
