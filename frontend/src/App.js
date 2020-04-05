@@ -1,10 +1,21 @@
 import React from "react";
+import "./global.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ActivityList from "./pages/ActivityList";
+import NewActivity from "./pages/NewActivity";
 
 function App() {
   return (
-    <div className="App">
-      <h1>ISO 14000</h1>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <ActivityList />
+        </Route>
+        <Route path="/activity/new" exact>
+          <NewActivity />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
