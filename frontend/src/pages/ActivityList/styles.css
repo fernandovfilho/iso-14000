@@ -1,0 +1,136 @@
+.activity-container {
+  height: 180px;
+  width: 100%;
+  background-color: #272588;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin-top: 40px;
+}
+
+header {
+  height: 60px;
+  display: flex;
+}
+
+header h1 {
+  color: #fff;
+  font-weight: 400;
+}
+
+header h2 {
+  color: #fff;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.header-title {
+  flex: 1;
+}
+
+.header-nav {
+  flex: 1;
+  margin-top: 20px;
+  text-align: right;
+}
+
+section ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 24px;
+  list-style: none;
+  margin-top: 40px;
+}
+
+section ul li {
+  display: flex;
+  position: relative;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+}
+
+.activity-header {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.activity-title {
+  flex: 1;
+  color: #454f63;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.activity-date {
+  flex: 1;
+  color: #454f63;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.activity-level {
+  margin-top: 10px;
+}
+
+.activity-level span {
+  background-color: #665eff;
+  border-radius: 4px;
+  color: #fff;
+  padding: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.activity-type {
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.activity-description {
+  margin-top: 15px;
+  color: #959dad;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: justify;
+}
+
+.button-delete {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  border: 0px solid;
+  right: 30px;
+  top: 30px;
+  border-radius: 5px;
+  background-color: #5a6270;
+  transition: 0.3s;
+}
+
+.button-delete:hover {
+  background-color: #fe0000;
+}
+
+.button-edit {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  border: 0px solid;
+  right: 80px;
+  top: 30px;
+  border-radius: 5px;
+  background-color: #5a6270;
+  transition: 0.3s;
+}
+
+.button-edit:hover {
+  background-color: #665eff;
+}
