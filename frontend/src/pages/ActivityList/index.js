@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import "./styles.css";
+import api from "../../services/api";
 
 export default function ActivityList() {
+  const [activities, setActivities] = useState([]);
+
+  const loadAllActivities = async () => {
+    const activities = await api.get("activities");
+
+    setActivities(activities.data);
+  };
+
+  useEffect(() => {
+    loadAllActivities();
+  }, []);
+
   return (
     <div className="activity-container">
       <div className="container">
@@ -20,34 +34,37 @@ export default function ActivityList() {
         </header>
         <section>
           <ul>
-            <li>
-              <strong className="activity-title">Concrete Production</strong>
-              <span className="activity-date">04/04/2020</span>
+            {activities.map((activity) => {
+              return (
+                <li key={activity.id}>
+                  <strong className="activity-title">{activity.title}</strong>
+                  <span className="activity-date">
+                    {moment(activity.createdAt).format("DD/MM/YYYY HH:mm")}
+                  </span>
 
-              <p className="activity-level">
-                <span>high</span>
-                <span className="activity-type">water</span>
-                <span className="activity-type">Poison 3kg</span>
-              </p>
+                  <p className="activity-level">
+                    <span>{activity.level}</span>
+                    <span className="activity-type">
+                      {activity.environment}
+                    </span>
+                    <span className="activity-type">
+                      {activity.contaminationType} {activity.value}
+                      {activity.unit}
+                    </span>
+                  </p>
 
-              <p className="activity-description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+                  <p className="activity-description">{activity.description}</p>
 
-              <button className="button-delete">
-                <FaTrashAlt color="#fff" />
-              </button>
+                  <button className="btn button-delete">
+                    <FaTrashAlt color="#fff" />
+                  </button>
 
-              <button className="button-edit">
-                <FaEdit color="#fff" />
-              </button>
-            </li>
+                  <button className="btn button-edit">
+                    <FaEdit color="#fff" />
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </section>
       </div>
