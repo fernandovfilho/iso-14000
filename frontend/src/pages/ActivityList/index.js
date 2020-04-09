@@ -4,6 +4,7 @@ import moment from "moment";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import "./styles.css";
 import api from "../../services/api";
+import swal from "sweetalert";
 
 export default function ActivityList() {
   const [activities, setActivities] = useState([]);
@@ -17,6 +18,25 @@ export default function ActivityList() {
   useEffect(() => {
     loadAllActivities();
   }, []);
+
+  const handleDeleteButton = (id) => {
+    swal({
+      title: "Tem certeza?",
+      text: "Esta ação não poderá ser desfeita!",
+      icon: "warning",
+      buttons: ["Cancelar", "Confirmar"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        deleteActivity(id);
+      }
+    });
+  };
+
+  const deleteActivity = async (id) => {
+    await api.delete(`activities/${id}`);
+    loadAllActivities();
+  };
 
   return (
     <div className="activity-container">
@@ -55,7 +75,12 @@ export default function ActivityList() {
 
                   <p className="activity-description">{activity.description}</p>
 
-                  <button className="btn button-delete">
+                  <button
+                    className="btn button-delete"
+                    onClick={() => {
+                      handleDeleteButton(activity.id);
+                    }}
+                  >
                     <FaTrashAlt color="#fff" />
                   </button>
 
