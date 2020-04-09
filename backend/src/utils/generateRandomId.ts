@@ -1,4 +1,4 @@
-import crypto from 'crypto'
+import * as crypto from 'crypto'
 
 export default () => {
     return crypto.randomBytes(4).toString('HEX')
